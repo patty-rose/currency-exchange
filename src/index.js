@@ -5,24 +5,36 @@ import './css/styles.css';
 import {CurrencyService} from './services/currency-service.js';
 
 // UI Logic
+function displayExchangeRate(exchangeResponse, currency2) {
+  const exchange = exchangeResponse.conversion_result;
+  $('.show-exchange').text(`The exchange is ${exchange} ${currency2}.`);
+}
+
+function displayErrors(error) {
+  $('.show-errors').text(`${error}`);
+}
 
 // JQUERY UI Logic
 $(document).ready(function() {
   $('#calculate').click(function() {
-    let currency1 = "USD";
-    let currency2 = "EUR";
+    let currency1 = $('#currency-from').val();
+    let currency2 = $('#currency-to').val();
     let amount = $('#amount').val();
     CurrencyService.getExchange(currency1, currency2, amount)
       .then(function(exchangeResponse) {
         console.log(exchangeResponse);
         if (exchangeResponse instanceof Error) {
-          throw Error(`API error: ${exchangeResponse.message}`);
+          if (exchangeResponse["error-type"] === "unsupported-code") {
+            throw Error(`Invalid currency selection`);
+          }
+          throw Error(`${exchangeResponse.message}`);
+        } else if (exchangeResponse.conversion_result === undefined) {
+          throw Error(`Input error-- input amount must be greater than or equal to 0.01`);
         }
-        const exchange = exchangeResponse.conversion_result;
-        $('.show-exchange').text(`The exchange is ${exchange} ${currency2}.`);
+        displayExchangeRate(exchangeResponse, currency2);
       })
       .catch(function(error) {
-        $('.show-errors').text(`${error}`);
+        displayErrors(error.message);
       });
   });
 });

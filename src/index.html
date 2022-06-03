@@ -6,33 +6,36 @@
 <body>
   <div class="container">
     <h1>Currency Exchange Calculator</h1>
-    <div class="input-group">
-      <input type="number" class="form-control" id="amount">
-      <div class="input-group-append">
-        <select class="custom-select" name="currency-from" id="currency-from">
-          <option selected value="USD">USD - United States Dollar</option>
-          <option value="MXN">MXN - Mexican Peso</option>
-          <option value="UAH">UAH - Ukrainian Hryvnia</option>
-          <option value="EGP">EGP - Egyptian Pound</option>
-          <option value="SYP">SYP - Syrian Pound</option>
-          <option value="CUP">CUP - Cuban Peso</option>
+    <form data-toggle="validator" role="form">
+      <div class="input-group">
+        <input required type="number" step="0.01" class="form-control" id="amount" min="0.01">
+        <div class="input-group-append">
+          <select class="custom-select" name="currency-from" id="currency-from">
+            <option selected value="USD">USD - United States Dollar</option>
+            <option value="MXN">MXN - Mexican Peso</option>
+            <option value="UAH">UAH - Ukrainian Hryvnia</option>
+            <option value="EGP">EGP - Egyptian Pound</option>
+            <option value="SYP">SYP - Syrian Pound</option>
+            <option value="CUP">CUP - Cuban Peso</option>
+          </select>
+        </div>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="currency-to">to</label>
+        </div>
+        <select class="custom-select" id="currency-to">
+          <option value="USD">USD - United States Dollar</option>
+            <option selected value="MXN">MXN - Mexican Peso</option>
+            <option value="UAH">UAH - Ukrainian Hryvnia</option>
+            <option value="EGP">EGP - Egyptian Pound</option>
+            <option value="SYP">SYP - Syrian Pound</option>
+            <option value="CUP">CUP - Cuban Peso</option>
+            <option value="KPW">KPW - North Korean WON</option>
         </select>
       </div>
-    </div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text" for="currency-to">to</label>
-      </div>
-      <select class="custom-select" id="currency-to">
-        <option value="USD">USD - United States Dollar</option>
-          <option selected value="MXN">MXN - Mexican Peso</option>
-          <option value="UAH">UAH - Ukrainian Hryvnia</option>
-          <option value="EGP">EGP - Egyptian Pound</option>
-          <option value="SYP">SYP - Syrian Pound</option>
-          <option value="CUP">CUP - Cuban Peso</option>
-      </select>
-    </div>
-    <button class="btn-success" id="calculate">Get exchange amount</button>
+      <button class="btn-success" id="calculate">Get exchange amount</button>
+    </form>
     <div class="show-exchange"></div>
     <div class="show-errors"></div>
   </div>
