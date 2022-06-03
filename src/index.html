@@ -6,8 +6,32 @@
 <body>
   <div class="container">
     <h1>Currency Exchange Calculator</h1>
-    <label for="amount">Enter amount in USD:</label>
-    <input id="amount" type="number">
+    <div class="input-group">
+      <input type="number" class="form-control" id="amount">
+      <div class="input-group-append">
+        <select class="custom-select" name="currency-from" id="currency-from">
+          <option selected value="USD">USD - United States Dollar</option>
+          <option value="MXN">MXN - Mexican Peso</option>
+          <option value="UAH">UAH - Ukrainian Hryvnia</option>
+          <option value="EGP">EGP - Egyptian Pound</option>
+          <option value="SYP">SYP - Syrian Pound</option>
+          <option value="CUP">CUP - Cuban Peso</option>
+        </select>
+      </div>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="currency-to">to</label>
+      </div>
+      <select class="custom-select" id="currency-to">
+        <option value="USD">USD - United States Dollar</option>
+          <option selected value="MXN">MXN - Mexican Peso</option>
+          <option value="UAH">UAH - Ukrainian Hryvnia</option>
+          <option value="EGP">EGP - Egyptian Pound</option>
+          <option value="SYP">SYP - Syrian Pound</option>
+          <option value="CUP">CUP - Cuban Peso</option>
+      </select>
+    </div>
     <button class="btn-success" id="calculate">Get exchange amount</button>
     <div class="show-exchange"></div>
     <div class="show-errors"></div>
