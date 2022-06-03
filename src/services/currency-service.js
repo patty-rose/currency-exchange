@@ -7,10 +7,10 @@ export class CurrencyService {
         if (!response.ok)
         { 
           if (response.status === 404) {
-          throw Error("404-- invalid currency");
-        } else if(response.status === 403) {
-          throw Error("403-- API error");
-        }
+            throw Error("404-- invalid currency");
+          } else if(response.status === 403) {
+            throw Error("403-- API error");
+          }
           throw Error(response.statusText);
         }
         return response.json();

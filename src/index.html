@@ -6,7 +6,7 @@
 <body>
   <div class="container">
     <h1>Currency Exchange Calculator</h1>
-    <form data-toggle="validator" role="form">
+    <form data-toggle="validator" role="form" id="calculateForm">
       <div class="input-group">
         <input required type="number" step="0.01" class="form-control" id="amount" min="0.01">
         <div class="input-group-append">
@@ -32,6 +32,9 @@
             <option value="SYP">SYP - Syrian Pound</option>
             <option value="CUP">CUP - Cuban Peso</option>
             <option value="KPW">KPW - North Korean WON</option>
+        </select>
+        <select class="custom-select" id="currencyList" onchange="show(this)">
+          <option value="">-- Select --</option>
         </select>
       </div>
       <button class="btn-success" id="calculate">Get exchange amount</button>
