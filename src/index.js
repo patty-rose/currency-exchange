@@ -3,16 +3,17 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import {CurrencyService} from './services/currency-service.js';
-import {CurrencyListService} from './services/currencyList-service.js';
 
 // UI Logic
 function populateSelect(response) {
   const currencyCodes = Object.keys(response.conversion_rates);
-  const ele = document.getElementById('currencyList');
-  for (var i = 0; i < currencyCodes.length; i++) {
-      ele.innerHTML = ele.innerHTML +
-          '<option value="' + currencyCodes[i] + '">' + currencyCodes[i] + '</option>';
-  }
+  $('#select').empty();
+  $.each(currencyCodes, function(i, p) {
+    $('#currency-from').append($('<option></option>').val(p).html(p));
+  });
+  $.each(currencyCodes, function(i, p) {
+    $('#currency-to').append($('<option></option>').val(p).html(p));
+  });
 }
 
 function displayExchangeRate(exchangeResponse, currency2) {
@@ -25,15 +26,12 @@ function displayErrors(error) {
   $('.show-errors').text(`${error}`);
 }
 
-async function  makeApiCall() {
-  const response = await CurrencyListService.getCurrencyList();
-  console.log(response);
-}
-
 // JQUERY UI Logic
 $(document).ready(function() {
-  const apiResponse = makeApiCall();
-  populateSelect(apiResponse);
+  CurrencyService.getCurrencyList()
+    .then(function(response) {
+      populateSelect(response);
+    });
 
   $('#calculateForm').submit(function(event) {
     event.preventDefault();
