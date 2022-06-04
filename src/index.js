@@ -6,13 +6,13 @@ import {CurrencyService} from './services/currency-service.js';
 
 // UI Logic
 function populateSelect(response) {
-  const currencyCodes = Object.keys(response.conversion_rates);
+  const currencyCodes = response.supported_codes;
   $('#select').empty();
-  $.each(currencyCodes, function(i, p) {
-    $('#currency-from').append($('<option></option>').val(p).html(p));
+  currencyCodes.forEach(function(code) {
+    $('#currency-from').append($('<option></option>').val(code[0]).html(code[0] + " - " + code[1]));
   });
-  $.each(currencyCodes, function(i, p) {
-    $('#currency-to').append($('<option></option>').val(p).html(p));
+  currencyCodes.forEach(function(code) {
+    $('#currency-to').append($('<option></option>').val(code[0]).html(code[0] + " - " + code[1]));
   });
 }
 
@@ -42,12 +42,12 @@ $(document).ready(function() {
 
     CurrencyService.getExchange(currency1, currency2, amount)
       .then(function(exchangeResponse) {
-        console.log(exchangeResponse);
         if (exchangeResponse instanceof Error) {
           throw Error(`${exchangeResponse.message}`);
-        } else if (exchangeResponse.conversion_result === undefined) {
-          throw Error(`Input error-- input amount must be greater than or equal to 0.01`);
-        }
+        } 
+        // else if (exchangeResponse.conversion_result === undefined) {
+        //   throw Error(`Input error-- input amount must be greater than or equal to 0.01`);
+        // }
         displayExchangeRate(exchangeResponse, currency2);
       })
       .catch(function(error) {

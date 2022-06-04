@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <title>currency exchange</title>
+  <title>Currency Exchange</title>
 </head>
 <body>
   <div class="container">
     <h1>Currency Exchange Calculator</h1>
     <form data-toggle="validator" role="form" id="calculateForm">
+      <input required type="number" step="0.01" class="form-control" id="amount" min="0.01">
       <div class="input-group">
-        <input required type="number" step="0.01" class="form-control" id="amount" min="0.01">
-        <div class="input-group-append">
-          <select class="custom-select" id="currency-from">
-            <option value="">--Select Currency--</option>
-          </select>
-        </div>
+        <select class="custom-select" id="currency-from">
+          <option value="">from</option>
+        </select>
       </div>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <label class="input-group-text" for="currency-to">to</label>
-        </div>
+      <div class="input-group">
         <select class="custom-select" id="currency-to">
-          <option value="">--Select Currency--</option>
+          <option value="">to</option>
         </select>
       </div>
       <button class="btn-success" id="calculate">Get exchange amount</button>
