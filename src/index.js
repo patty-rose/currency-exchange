@@ -16,13 +16,19 @@ function populateSelect(response) {
   });
 }
 
-function displayExchangeRate(exchangeResponse, currency2) {
+function displayExchange(exchangeResponse) {
+  console.log(exchangeResponse);
   const exchange = exchangeResponse.conversion_result;
-  $('.show-exchange').text(`The exchange is ${exchange} ${currency2}.`);
+  $('#to-amount').val(exchange);
+  $('#amountCalculated').text(exchange);
+  $('#currencyToDisplay').text(exchangeResponse.target_code);
+  $('#currencyFromDisplay').text(exchangeResponse.base_code);
+  $('.displayConversion').show();
 }
 
 function displayErrors(error) {
   $('.show-exchange').hide();
+  $('.displayConversion').hide();
   $('.show-errors').text(`${error}`);
 }
 
@@ -38,18 +44,25 @@ $(document).ready(function() {
 
     let currency1 = $('#currency-from').val();
     let currency2 = $('#currency-to').val();
-    let amount = $('#amount').val();
+    let amount = $('#from-amount').val();
+    $('#amountEntered').text(amount);
 
     CurrencyService.getExchange(currency1, currency2, amount)
       .then(function(exchangeResponse) {
-        if (exchangeResponse instanceof Error) {
-          throw Error(`Exchange Rate API ${exchangeResponse}`);
-        } else if (exchangeResponse.conversion_result === undefined) {
+        console.log(exchangeResponse);
+        if (exchangeResponse["error-type"] === "unsupported-code") {
+          throw Error("currency code does not exist");
+        } else if (exchangeResponse.result === "success" && exchangeResponse.conversion_result === undefined) {
           throw Error(`Input amount must be greater than or equal to 0.01`);
+        } else if (exchangeResponse instanceof Error) { 
+          throw Error(`Exchange Rate API ${exchangeResponse}`);
         }
-        displayExchangeRate(exchangeResponse, currency2);
+        
+        console.log(exchangeResponse);
+        displayExchange(exchangeResponse);
       })
       .catch(function(error) {
+        console.log(error.message);
         displayErrors(error.message);
       });
   });

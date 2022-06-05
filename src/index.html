@@ -1,24 +1,39 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <title>Currency Exchange</title>
+  <title>Currency Converter</title>
 </head>
 <body>
   <div class="container">
-    <h1>Currency Exchange Calculator</h1>
+    <h1>Currency Converter</h1>
+    <div class="displayConversion">
+      <h6><span id="amountEntered"></span> <span id="currencyFromDisplay"></span> equals</h6>
+      <h2><span id="amountCalculated"></span> <span id="currencyToDisplay"></span>
+    </div>
     <form data-toggle="validator" role="form" id="calculateForm">
-      <input required type="number" step="0.01" class="form-control" id="amount" min="0.01">
-      <div class="input-group">
-        <select class="custom-select" id="currency-from">
-          <option value="">from</option>
-        </select>
+      <div class='row'>
+        <div class='column'>
+          <div class='from-column'>
+            <div class="input-group">
+              <select class="custom-select" id="currency-from">
+                <option value="">from</option>
+              </select>
+            </div>
+            <input required type="number" step="0.01" class="form-control" id="from-amount" min="0.01">
+          </div>
+        </div>
+        <div class='column'>
+          <div class='to-column'>
+            <div class="input-group">
+              <select class="custom-select" id="currency-to">
+                <option value="">to</option>
+              </select>
+            </div>
+            <input type="number" class="form-control" id="to-amount" READONLY>
+          </div>
+        </div>
       </div>
-      <div class="input-group">
-        <select class="custom-select" id="currency-to">
-          <option value="">to</option>
-        </select>
-      </div>
-      <button class="btn-success" id="calculate">Get exchange amount</button>
+      <button type="submit" class="btn btn-success" id="calculate">Get exchange amount</button>
     </form>
     <div class="show-exchange"></div>
     <div class="show-errors"></div>
