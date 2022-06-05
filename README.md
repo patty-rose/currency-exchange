@@ -1,8 +1,8 @@
-# _NAME_
+# _Currency Converter_
 
 #### By _**Patty Otero**_
 
-#### _description_
+#### _A simple app that converts currencies as provided by API fetch from ExchangeRate-Api_
 
 ## Github pages site: 
 https://patty-rose.github.io/currency-exchange
@@ -19,7 +19,7 @@ https://patty-rose.github.io/currency-exchange
 
 ## Description
 
-_description_
+_User can select a origin currency, a target currency, and enter an amount. Currency options are provided by an API call to ExchangeRate-Api. User can then click get exchange and the currency will be converted to the target currency._
 
 ## Setup/Installation Requirements
 
