@@ -43,11 +43,10 @@ $(document).ready(function() {
     CurrencyService.getExchange(currency1, currency2, amount)
       .then(function(exchangeResponse) {
         if (exchangeResponse instanceof Error) {
-          throw Error(`${exchangeResponse.message}`);
-        } 
-        // else if (exchangeResponse.conversion_result === undefined) {
-        //   throw Error(`Input error-- input amount must be greater than or equal to 0.01`);
-        // }
+          throw Error(`Exchange Rate API ${exchangeResponse}`);
+        } else if (exchangeResponse.conversion_result === undefined) {
+          throw Error(`Input amount must be greater than or equal to 0.01`);
+        }
         displayExchangeRate(exchangeResponse, currency2);
       })
       .catch(function(error) {

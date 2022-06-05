@@ -13,30 +13,18 @@ export class CurrencyService {
   }
 
   static getExchange(currency1, currency2, amount) {
-    return fetch(`https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/pair/${currency1}/kwp/${amount}`)
+    return fetch(`https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/pair/${currency1}/fgh/${amount}`)
       .then(function(response) {
         console.log(response);
-        let notOkError;
-        if (!response.ok) {
-          notOkError = ([response.statusText, response.status]);
+        if (!response.ok && response.status != 404) {
+          throw Error([response.statusText]);
         }
-        let responseJSON = response.json();
-        let errorAndJSON = [notOkError, responseJSON];
-        return errorAndJSON;
+        return response.json();
       })
-      .then(function(errorAndJSON) {
-        console.log(errorAndJSON);
-        let notOkError = errorAndJSON[0];
-        let responseJSON = errorAndJSON[1];
-        console.log(responseJSON);
-        if (responseJSON[2]["error-type"] === "unsupported-code") {
-          throw Error("invalid currency input");
-        } else if(responseJSON["error-type"] === "invalid-key") {
-          throw Error("invalid API key");
-        } else if (notOkError) {
-          throw Error(notOkError);
+      .then(function(responseJson) {
+        if (responseJson["error-type"] === "unsupported-code") {
+          throw Error("currency does not exist");
         }
-        return responseJSON;
       })
       .catch(function(error) {
         return Error(error);
