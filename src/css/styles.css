@@ -1,4 +1,4 @@
-body{
+body {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -10,7 +10,7 @@ body{
   background-color: grey;
 }
 
-.container{
+.container {
   position: absolute;
   background: rgba(0, 0, 0, 0.5);
   color: #f1f1f1;
@@ -35,14 +35,15 @@ body{
   margin-inline: 2%;
 }
 
-.form{
+.form {
   margin: auto;
   justify-content: center;
   text-align: center;
 }
 
 .input-group {
-  margin-bottom: 5%;;
+  margin-bottom: 5%;
+  ;
 }
 
 .displayConversion {
@@ -50,5 +51,6 @@ body{
 }
 
 #calculate {
-  margin: 10px;;
+  margin: 10px;
+  ;
 }
